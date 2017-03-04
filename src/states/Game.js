@@ -1,19 +1,23 @@
 import Phaser from 'phaser';
 
 export default class extends Phaser.State {
-  init () {
+  init() {
 
   }
 
-  preload () {
+  preload() {
 
   }
 
-  create () {
+  create() {
 
   }
 
-  render () {
+  update() {
+    
+  }
+
+  render() {
 
   }
 }
