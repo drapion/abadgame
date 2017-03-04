@@ -14,7 +14,8 @@ export default class extends Phaser.State {
     this is where you preload things
     */
     this.load.image('grass', 'assets/tileset/grass.png');
-    this.load.tilemap('map', 'assets/tilemap/map.json');
+    this.load.tilemap('map', 'assets/tilemap/map.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.spritesheet('dan', 'assets/general/dan.png', 32, 32);
   }
 
   create() {
