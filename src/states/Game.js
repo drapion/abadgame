@@ -27,6 +27,7 @@ export default class extends Phaser.State {
   }
 
   update() {
+
     game.physics.arcade.collide(this.dan, this.layer);
     this.dan.body.velocity.x = 0;
 
