@@ -6,7 +6,7 @@ export default class extends Phaser.State {
   }
 
   preload() {
-
+    var cursors
   }
 
   create() {
@@ -16,14 +16,30 @@ export default class extends Phaser.State {
     this.map.addTilesetImage('grass');
 
     this.layer = this.map.createLayer('Tile Layer 1');
+    this.map.setCollisionBetween(1, 100, true, 'Tile Layer 1');
 
     this.dan = this.add.sprite(0, 0, 'dan');
     this.physics.enable(this.dan, Phaser.Physics.ARCADE);
     this.dan.body.collideWorldBounds = true;
     this.dan.body.gravity.set(0, 180);
+
+    this.cursors = this.game.input.keyboard.createCursorKeys();
   }
 
   update() {
+    game.physics.arcade.collide(this.dan, this.layer);
+
+    if (this.cursors.up.isDown && this.dan.body.onFloor()) {
+      this.dan.body.velocity.y = -150;
+    } else if (this.cursors.right.isDown) {
+      this.dan.body.velocity.x = 150;
+    } else if (this.cursors.right.isUp) {
+      this.dan.body.velocity.x = 0;
+    } else if (this.cursors.left.isDown) {
+      this.dan.body.velocity.x = -150;
+    } else if (this.cursors.left.isUp) {
+      this.dan.body.velocity.x = 0;
+    }
 
   }
 
