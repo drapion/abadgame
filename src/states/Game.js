@@ -2,11 +2,11 @@ import Phaser from 'phaser';
 
 export default class extends Phaser.State {
   init() {
-
+    var cursors
   }
 
   preload() {
-    var cursors
+
   }
 
   create() {
@@ -28,17 +28,16 @@ export default class extends Phaser.State {
 
   update() {
     game.physics.arcade.collide(this.dan, this.layer);
+    this.dan.body.velocity.x = 0;
 
     if (this.cursors.up.isDown && this.dan.body.onFloor()) {
       this.dan.body.velocity.y = -150;
     } else if (this.cursors.right.isDown) {
+      console.log("right down");
       this.dan.body.velocity.x = 150;
-    } else if (this.cursors.right.isUp) {
-      this.dan.body.velocity.x = 0;
     } else if (this.cursors.left.isDown) {
+      console.log("left down");
       this.dan.body.velocity.x = -150;
-    } else if (this.cursors.left.isUp) {
-      this.dan.body.velocity.x = 0;
     }
 
   }
