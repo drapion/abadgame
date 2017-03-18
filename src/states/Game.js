@@ -4,6 +4,7 @@ export default class extends Phaser.State {
   init() {
     this.jumpTimer = 0;
     var cursors
+    var weapon
   }
 
   preload() {
@@ -12,6 +13,7 @@ export default class extends Phaser.State {
 
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.weapon = game.add.weapon(30, 'bullet');
 
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
@@ -29,6 +31,10 @@ export default class extends Phaser.State {
 
     this.camera.follow(this.dan);
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
+
+    this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    this.weapon.bulletSpeed = 650
+    this.weapon.fireRate = 50;
   }
 
   update() {
