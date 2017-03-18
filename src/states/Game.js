@@ -5,6 +5,7 @@ export default class extends Phaser.State {
     this.jumpTimer = 0;
     var cursors
     var weapon
+    var fireKey
   }
 
   preload() {
@@ -28,6 +29,7 @@ export default class extends Phaser.State {
     this.dan.body.gravity.set(0, 450);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
 
     this.camera.follow(this.dan);
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
@@ -35,6 +37,7 @@ export default class extends Phaser.State {
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     this.weapon.bulletSpeed = 650
     this.weapon.fireRate = 50;
+    this.weapon.trackSprite(this.dan, 0, 0, true);
   }
 
   update() {
@@ -52,6 +55,9 @@ export default class extends Phaser.State {
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {
         this.dan.body.velocity.y = -250;
         this.jumpTimer = this.time.now + 750;
+    }
+    if (this.fireKey.isDown) {
+      weapon.fire();
     }
   }
 
