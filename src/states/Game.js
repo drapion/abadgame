@@ -15,7 +15,12 @@ export default class extends Phaser.State {
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
+<<<<<<< HEAD
     this.weapon = this.add.weapon(5, 'bullet');
+=======
+    
+    this.weapon = game.add.weapon(30, 'bullet');
+>>>>>>> cddfc0065a9754f007201b18b4c9c9e493b1af8e
 
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
@@ -28,6 +33,10 @@ export default class extends Phaser.State {
     this.physics.enable(this.dan, Phaser.Physics.ARCADE);
     this.dan.body.collideWorldBounds = true;
     this.dan.body.gravity.set(0, 450);
+    this.dan.scale.x = -1;
+    this.dan.anchor.set(.5);
+
+    this.alex = this.add.sprite(300, 0, 'alex');
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.Z);
@@ -49,9 +58,13 @@ export default class extends Phaser.State {
 
     if (this.cursors.left.isDown) {
       this.dan.body.velocity.x = -150;
+      this.dan.scale.x = 1;
+      this.dan.anchor.set(.5);
     }
     if (this.cursors.right.isDown) {
       this.dan.body.velocity.x = 150;
+      this.dan.scale.x = -1;
+      this.dan.anchor.set(.5);
     }
 
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {

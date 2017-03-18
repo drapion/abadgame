@@ -1,4 +1,5 @@
-# DANQUEST
+## DanQuest:
+- Coming soon.
 
 
 # Setup
@@ -52,3 +53,4 @@ Big thanks to this great repos:
 https://github.com/belohlavek/phaser-es6-boilerplate
 
 https://github.com/cstuncsik/phaser-es6-demo
+>>>>>>> 2683349ff85779f08b4ecc64c2fc3b9a4554a895
