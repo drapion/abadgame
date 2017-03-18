@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 export default class extends Phaser.State {
   init() {
     this.jumpTimer = 0;
+    var cursors
   }
 
   preload() {
