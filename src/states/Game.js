@@ -11,6 +11,7 @@ export default class extends Phaser.State {
 
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.world.setBounds(0, 0, 1120, 608);
 
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
@@ -31,7 +32,7 @@ export default class extends Phaser.State {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.camera.follow(this.dan);
-    this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
+    this.camera.deadzone = new Phaser.Rectangle(100, 100, 400, 400);
   }
 
   update() {
