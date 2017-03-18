@@ -15,7 +15,7 @@ export default class extends Phaser.State {
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
-    this.weapon = this.add.weapon(30, 'bullet');
+    this.weapon = this.add.weapon(5, 'bullet');
 
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
@@ -37,13 +37,13 @@ export default class extends Phaser.State {
 
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     this.weapon.bulletSpeed = 650
-    this.weapon.fireRate = 50;
+    this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
   }
 
   update() {
     this.physics.arcade.collide(this.dan, this.layer);
-    this.physics.arcade.collide(this.weapon, this.map);
+    this.physics.arcade.collide(this.weapon, this.layer);
 
     this.dan.body.velocity.x = 0;
 
