@@ -17,7 +17,20 @@ export default class extends Phaser.State {
     this.map.setCollisionBetween(1, 2);
 
     this.dan = this.add.sprite(0, 288, 'dan');
+
     this.alex = this.add.sprite(770, 274, 'alex');
+    this.laugh = this.add.audio('laugh');
+
+    this.bush = this.add.sprite(736, 305, 'bush');
+    this.bush.anchor.set(.5);
+
+    this.danmove = this.add.tween(this.dan);
+
+    this.danmove.to({ x: 300 }, 7500, 'Linear', true, 0);
+
+    this.time.events.add(Phaser.Timer.SECOND * 8, () => {
+      this.laugh.play();
+    }, this);
   }
 
   update() {
