@@ -23,6 +23,10 @@ export default class extends Phaser.State {
     this.physics.enable(this.dan, Phaser.Physics.ARCADE);
     this.dan.body.collideWorldBounds = true;
     this.dan.body.gravity.set(0, 450);
+    this.dan.scale.x = -1;
+    this.dan.anchor.set(.5);
+
+    this.alex = this.add.sprite(300, 0, 'alex');
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -37,9 +41,13 @@ export default class extends Phaser.State {
 
     if (this.cursors.left.isDown) {
       this.dan.body.velocity.x = -150;
+      this.dan.scale.x = 1;
+      this.dan.anchor.set(.5);
     }
     if (this.cursors.right.isDown) {
       this.dan.body.velocity.x = 150;
+      this.dan.scale.x = -1;
+      this.dan.anchor.set(.5);
     }
 
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {
