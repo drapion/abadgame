@@ -15,9 +15,10 @@ export default class extends Phaser.State {
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
+
+    this.weapon = this.add.weapon(5, 'bullet');
     
     this.weapon = game.add.weapon(30, 'bullet');
-
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
 
@@ -33,19 +34,20 @@ export default class extends Phaser.State {
     this.dan.anchor.set(.5);
 
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
+    this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.Z);
 
     this.camera.follow(this.dan);
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
 
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     this.weapon.bulletSpeed = 650
-    this.weapon.fireRate = 50;
+    this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
   }
 
   update() {
     this.physics.arcade.collide(this.dan, this.layer);
+    this.physics.arcade.collide(this.weapon, this.layer);
 
     this.dan.body.velocity.x = 0;
 
@@ -65,7 +67,7 @@ export default class extends Phaser.State {
         this.jumpTimer = this.time.now + 750;
     }
     if (this.fireKey.isDown) {
-      weapon.fire();
+      this.weapon.fire();
     }
   }
 
