@@ -32,8 +32,6 @@ export default class extends Phaser.State {
     this.dan.scale.x = -1;
     this.dan.anchor.set(.5);
 
-    this.alex = this.add.sprite(300, 0, 'alex');
-
     this.cursors = this.input.keyboard.createCursorKeys();
     this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
 
