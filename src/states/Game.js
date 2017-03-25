@@ -15,13 +15,10 @@ export default class extends Phaser.State {
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
-<<<<<<< HEAD
+
     this.weapon = this.add.weapon(5, 'bullet');
-=======
     
     this.weapon = game.add.weapon(30, 'bullet');
->>>>>>> cddfc0065a9754f007201b18b4c9c9e493b1af8e
-
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
 
