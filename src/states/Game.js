@@ -56,13 +56,14 @@ export default class extends Phaser.State {
 
     if (this.cursors.left.isDown) {
       this.dan.body.velocity.x = -150;
+      this.dan.scale.x = 1
       this.dan.anchor.set(.5);
-      this.dan.angle = -1;
     }
+
     if (this.cursors.right.isDown) {
       this.dan.body.velocity.x = 150;
+      this.dan.scale.x = -1
       this.dan.anchor.set(.5);
-      this.dan.angle = 1;
     }
 
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {
