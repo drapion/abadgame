@@ -3,9 +3,12 @@ import Phaser from 'phaser';
 export default class extends Phaser.State {
   init() {
     this.jumpTimer = 0;
-    var cursors
-    var weapon
-    var fireKey
+    var cursors;
+    var weapon;
+    var fireKey;
+    var shootTimer;
+    var wandom
+    this.shootTimer = 0;
   }
 
   preload() {
@@ -16,9 +19,8 @@ export default class extends Phaser.State {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
 
-    this.weapon = this.add.weapon(5, 'bullet');
+    this.weapon = this.add.weapon(10, 'bullet');
     
-    this.weapon = game.add.weapon(30, 'bullet');
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
 
@@ -40,12 +42,13 @@ export default class extends Phaser.State {
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
 
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    this.weapon.bulletSpeed = 650
+    this.weapon.bulletSpeed = 650;
     this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
   }
 
   update() {
+    this.shootTimer++
     this.physics.arcade.collide(this.dan, this.layer);
     this.physics.arcade.collide(this.weapon, this.layer);
 
@@ -53,25 +56,26 @@ export default class extends Phaser.State {
 
     if (this.cursors.left.isDown) {
       this.dan.body.velocity.x = -150;
-      this.dan.scale.x = 1;
       this.dan.anchor.set(.5);
+      this.dan.angle = -1;
     }
     if (this.cursors.right.isDown) {
       this.dan.body.velocity.x = 150;
-      this.dan.scale.x = -1;
       this.dan.anchor.set(.5);
+      this.dan.angle = 1;
     }
 
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {
         this.dan.body.velocity.y = -250;
         this.jumpTimer = this.time.now + 750;
     }
-    if (this.fireKey.isDown) {
+    if (this.fireKey.isDown && this.shootTimer > 20) {
       this.weapon.fire();
+      this.shootTimer = 0
     }
   }
 
   render() {
-
+    this.game.debug.text(this.shootTimer, 0, 10);
   }
 }
