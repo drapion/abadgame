@@ -45,6 +45,8 @@ export default class extends Phaser.State {
     this.weapon.bulletSpeed = 650;
     this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
+
+    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.bulletHit, null, this);
   }
 
   update() {
@@ -74,6 +76,10 @@ export default class extends Phaser.State {
       this.weapon.fire();
       this.shootTimer = 0
     }
+  }
+
+  bulletHit() {
+    this.weapon.bullets.killAll();
   }
 
   render() {

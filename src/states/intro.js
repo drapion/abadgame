@@ -17,6 +17,8 @@ export default class extends Phaser.State {
     this.map.setCollisionBetween(1, 2);
 
     this.dan = this.add.sprite(32, 288, 'dan');
+    this.logo = this.add.sprite(this.world.centerX, -150, 'logo');
+    this.logo.anchor.x = .5;
     this.guy = this.add.sprite(0, 288, 'guyfiery');
     this.guy.anchor.x = .5;
     this.guy.scale.x = -1;
@@ -26,6 +28,8 @@ export default class extends Phaser.State {
 
     this.bush = this.add.sprite(736, 305, 'bush');
     this.bush.anchor.set(.5);
+
+    this.logomove = this.add.tween(this.logo);
 
     this.danmove = this.add.tween(this.dan);
     this.danmove.to({ x: 396 }, 7500, 'Linear', true, 0);
@@ -44,10 +48,10 @@ export default class extends Phaser.State {
 
     this.time.events.add(Phaser.Timer.SECOND * 9.5, () => {
       this.alexmove = this.add.tween(this.alex);
-      this.alexmove.to({ x: -100 }, 500, 'Linear', true, 0);
+      this.alexmove.to({ x: -100 }, 1000, 'Linear', true, 0);
+      this.logomove.to({ y: 38}, 1000, 'Linear', true, 0);
       this.guy.kill();
     }, this);
-    this.laugh.pause();
 
 
     this.input.onDown.add(this.skip, this);
