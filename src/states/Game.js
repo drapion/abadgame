@@ -50,7 +50,7 @@ export default class extends Phaser.State {
   update() {
     this.shootTimer++
     this.physics.arcade.collide(this.dan, this.layer);
-    this.physics.arcade.collide(this.weapon, this.layer);
+    this.physics.arcade.collide(this.weapon.bullet, this.layer);
 
     this.dan.body.velocity.x = 0;
 
