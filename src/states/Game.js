@@ -84,5 +84,6 @@ export default class extends Phaser.State {
 
   render() {
     this.game.debug.text(this.shootTimer, 0, 10);
+    this.game.debug.text('🌮', 0, 30);
   }
 }
