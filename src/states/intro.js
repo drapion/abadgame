@@ -60,6 +60,6 @@ export default class extends Phaser.State {
   }
 
   skip () {
-    this.game.state.start('Game');
+    this.game.state.start('Menu');
   }
 }
