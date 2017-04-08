@@ -30,6 +30,7 @@ export default class extends Phaser.State {
 
     this.dan = this.add.sprite(0, 0, 'dan');
     this.physics.enable(this.dan, Phaser.Physics.ARCADE);
+    this.physics.enable(this.weapon, Phaser.Physics.ARCADE);
     this.dan.body.collideWorldBounds = true;
     this.dan.body.gravity.set(0, 450);
     this.dan.scale.x = -1;
@@ -46,7 +47,7 @@ export default class extends Phaser.State {
     this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
 
-    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.weapon.killAll(), null, this);
+    this.physics.arcade.overlap(this.weapon.Bullet, this.layer, this.weapon.bullet.kill(), null, this);
   }
 
   update() {
