@@ -47,6 +47,8 @@ export default class extends Phaser.State {
       this.alexmove.to({ x: -100 }, 500, 'Linear', true, 0);
       this.guy.kill();
     }, this);
+    this.laugh.pause();
+
 
     this.input.onDown.add(this.skip, this);
   }
