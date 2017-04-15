@@ -44,6 +44,8 @@ export default class extends Phaser.State {
     this.weapon.bulletSpeed = 650
     this.weapon.fireRate = 50;
     this.weapon.trackSprite(this.dan, 0, 0, true);
+
+    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.bulletHit, null, this);
   }
 // i play pokemon go
   update() {
