@@ -46,13 +46,13 @@ export default class extends Phaser.State {
     this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
 
-    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.bulletHit(), null, this);
+    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.bulletHit, null, this);
   }
 
   update() {
     this.shootTimer++
     this.physics.arcade.collide(this.dan, this.layer);
-    this.physics.arcade.collide(this.weapon.bullets, this.layer);
+    //this.physics.arcade.collide(this.weapon.bullets, this.layer);
 
     this.dan.body.velocity.x = 0;
 
@@ -74,12 +74,12 @@ export default class extends Phaser.State {
     }
     if (this.fireKey.isDown && this.shootTimer > 20) {
       this.weapon.fire();
-      this.shootTimer = 0
+      this.shootTimer = 0;
     }
   }
 
   bulletHit() {
-    this.weapon.bullets.killAll();
+    this.weapon.bullets.callAllExists('kill', true);
   }
 
   render() {
