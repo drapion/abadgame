@@ -48,11 +48,11 @@ export default class extends Phaser.State {
 
     this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.weapon.bullets.killAll, null, this);
   }
-
+// i play pokemon go
   update() {
     this.shootTimer++
     this.physics.arcade.collide(this.dan, this.layer);
-    //this.physics.arcade.collide(this.weapon.bullets, this.layer);
+    this.physics.arcade.collide(this.weapon.bullets, this.layer);
 
     this.dan.body.velocity.x = 0;
 
