@@ -46,7 +46,7 @@ export default class extends Phaser.State {
     this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
 
-    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.bulletHit, null, this);
+    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.weapon.bullets.killAll, null, this);
   }
 
   update() {
