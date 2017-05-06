@@ -3,9 +3,12 @@ import Phaser from 'phaser';
 export default class extends Phaser.State {
   init() {
     this.jumpTimer = 0;
-    var cursors
-    var weapon
-    var fireKey
+    var cursors;
+    var weapon;
+    var fireKey;
+    var shootTimer;
+    var wandom
+    this.shootTimer = 0;
   }
 
   preload() {
@@ -15,9 +18,10 @@ export default class extends Phaser.State {
   create() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.world.setBounds(0, 0, 1120, 608);
-    
-    this.weapon = game.add.weapon(30, 'bullet');
 
+    this.weapon = this.add.weapon(10, 'bullet');
+    this.weapon.trackSprite(this.player);
+    
     this.map = this.add.tilemap('map');
     this.map.addTilesetImage('grass');
 
@@ -26,13 +30,11 @@ export default class extends Phaser.State {
     this.map.setCollisionBetween(1, 2);
 
     this.dan = this.add.sprite(0, 0, 'dan');
-    this.physics.enable(this.dan, Phaser.Physics.ARCADE);
+    this.physics.enable(this.dan, Phaser.Physics.ARCADE);;
     this.dan.body.collideWorldBounds = true;
     this.dan.body.gravity.set(0, 450);
     this.dan.scale.x = -1;
     this.dan.anchor.set(.5);
-
-    this.alex = this.add.sprite(300, 0, 'alex');
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.Z);
@@ -41,24 +43,29 @@ export default class extends Phaser.State {
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
 
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    this.weapon.bulletSpeed = 650
-    this.weapon.fireRate = 50;
+    this.weapon.bulletSpeed = 650;
+    this.weapon.fireRate = 1;
     this.weapon.trackSprite(this.dan, 0, 0, true);
+
+    this.physics.arcade.overlap(this.weapon.bullets, this.layer, this.weapon.bullets.killAll, null, this);
   }
-// i play pokemon go
+
   update() {
+    this.shootTimer++
     this.physics.arcade.collide(this.dan, this.layer);
-    this.physics.arcade.collide(this.weapon.bullets, this.layer);
+    //this.physics.arcade.collide(this.weapon.bullets, this.layer);
+
     this.dan.body.velocity.x = 0;
 
     if (this.cursors.left.isDown) {
       this.dan.body.velocity.x = -150;
-      this.dan.scale.x = 1;
+      this.dan.scale.x = 1
       this.dan.anchor.set(.5);
     }
+
     if (this.cursors.right.isDown) {
       this.dan.body.velocity.x = 150;
-      this.dan.scale.x = -1;
+      this.dan.scale.x = -1
       this.dan.anchor.set(.5);
     }
 
@@ -66,12 +73,18 @@ export default class extends Phaser.State {
         this.dan.body.velocity.y = -350;
         this.jumpTimer = this.time.now + 750;
     }
-    if (this.fireKey.isDown) {
-      weapon.fire();
+    if (this.fireKey.isDown && this.shootTimer > 20) {
+      this.weapon.fire();
+      this.shootTimer = 0;
     }
   }
 
-  render () {
+  bulletHit() {
+    this.weapon.bullets.callAllExists('kill', true);
+  }
 
+  render() {
+    this.game.debug.text(this.shootTimer, 0, 10);
+    this.game.debug.text('🌮', 0, 30);
   }
 }
