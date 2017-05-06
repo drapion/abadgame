@@ -35,7 +35,7 @@ export default class extends Phaser.State {
     this.alex = this.add.sprite(300, 0, 'alex');
 
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
+    this.fireKey = this.input.keyboard.addKey(Phaser.Keyboard.Z);
 
     this.camera.follow(this.dan);
     this.camera.deadzone = new Phaser.Rectangle(100, 100, 600, 400);
@@ -63,7 +63,7 @@ export default class extends Phaser.State {
     }
 
     if (this.cursors.up.isDown && this.dan.body.onFloor() && this.time.now > this.jumpTimer) {
-        this.dan.body.velocity.y = -250;
+        this.dan.body.velocity.y = -350;
         this.jumpTimer = this.time.now + 750;
     }
     if (this.fireKey.isDown) {
